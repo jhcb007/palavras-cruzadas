@@ -81,6 +81,10 @@ function PerguntasController($scope, Aluno) {
         $scope.alunos = resul.dado;
     });
 
+    Aluno.update({}, function (resul) {
+        $scope.alunos = resul.dado;
+    });
+
 
     (function ($) {
         // plugin namespace
