@@ -11,8 +11,7 @@
             <div class="col-3">
                 <h4>Perguntas</h4>
                 <p>Qual foi o marco da Revolução Francesa?</p>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit
-                    amet fermentum.</p>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
                 <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
             </div>
             <div class="col-9">
@@ -26,11 +25,11 @@
         </div>
         <div class="list-group text-center" style="overflow-y: auto; height:600px; width: 140px;">
             <div class="profile-header-img" ng-repeat="a in alunos">
-                <a href="https://facebook.com/{{a.id_facebook}}" target="_blank">
-                    <img class="img-circle"  ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=normal"/>
+                <a href="https://facebook.com/{{a.id_facebook}}" title="{{a.nome}}" target="_blank">
+                    <img class="img-circle" ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=normal"/>
                 </a>
                 <div class="rank-label-container">
-                    <span class="label label-default rank-label" ng-bind="a.pontuacao"></span>
+                    <span class="label label-default rank-label">{{a.pontuacao}} Pontos</span>
                 </div>
             </div>
         </div>

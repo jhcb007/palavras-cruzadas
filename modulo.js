@@ -76,25 +76,26 @@ function TurmasController($rootScope, $scope, Turmas) {
 }
 
 function PerguntasController($rootScope, $scope, Aluno) {
-    Aluno.get({}, function (resul) {
-        $scope.alunos = resul.dado;
-        angular.forEach($scope.alunos, function (value, key) {
-            if ($rootScope._aluno_id == value.id_facebook) {
-                $rootScope._aluno_banco_id = value._id;
-                $rootScope._aluno_pontuacao = value.pontuacao;
-            }
-        });
-    });
 
-    $scope.setPontuacao = function () {
-        var dados = {
-            _id: $rootScope._aluno_banco_id,
-            pontuacao: $rootScope._aluno_pontuacao
-        };
-        Aluno.update({}, dados, function (resul) {
-            console.log(resul);
+    $scope.atualizaAlunos = function () {
+        Aluno.get({}, function (resul) {
+            $scope.alunos = resul.dado;
+            angular.forEach($scope.alunos, function (value, key) {
+                if ($rootScope._aluno_id == value.id_facebook) {
+                    $rootScope._aluno_banco_id = value._id;
+                    $rootScope._aluno_pontuacao = value.pontuacao;
+                    _ID_ALUNO = $rootScope._aluno_banco_id;
+                    _PONTUACAO = $rootScope._aluno_pontuacao;
+                }
+            });
         });
     };
+
+    $scope.atualizaAlunos();
+
+    setInterval(function () {
+        $scope.atualizaAlunos();
+    }, 2000);
 
 
     jQuery(function ($) {

@@ -57,7 +57,8 @@ router.route("/api/alunos")
     })
     .put(function (req, res) {
         var response = {};
-        alunos.findByIdAndUpdate(req.body.id_facebook, {pontuacao: req.body.pontuacao}, function (err) {
+        req.body.pontuacao = (req.body.pontuacao + 1);
+        alunos.findByIdAndUpdate(req.body._id, {pontuacao: req.body.pontuacao}, function (err) {
             if (err) {
                 response = {"status": false, "dado": "Error fetching data"};
             } else {

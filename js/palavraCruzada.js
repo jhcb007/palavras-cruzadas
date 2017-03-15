@@ -1,3 +1,6 @@
+var _ID_ALUNO;
+var _PONTUACAO;
+
 (function ($) {
     // plugin namespace
     $.fn.puzzle = function (method) {
@@ -201,8 +204,19 @@
             if ((idx = words.indexOf(selectedWord)) > -1 || (idx = words.indexOf(reversed)) > -1) {
                 words.splice(idx, 1);
                 $('.' + opt.highlightClass).addClass(opt.foundClass);
-                //$scope.setPontuacao();
-                console.log(original);//post de que encontrou a resposta
+                var dados = {
+                    _id: _ID_ALUNO,
+                    pontuacao: _PONTUACAO
+                }
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://192.168.254.247:3000/api/alunos',
+                    data: JSON.stringify(dados), // or JSON.stringify ({name: 'jonas'}),
+                    success: function (data) {
+                    },
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
                 $(canvas).trigger('right');
             } else {
                 $(canvas).trigger('wrong');
