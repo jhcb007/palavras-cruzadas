@@ -1,5 +1,6 @@
 var _ID_ALUNO;
 var _PONTUACAO;
+var _url = "http://192.168.254.247:3000/api/alunos";
 
 (function ($) {
     // plugin namespace
@@ -210,7 +211,7 @@ var _PONTUACAO;
                 }
                 $.ajax({
                     type: 'PUT',
-                    url: 'http://192.168.254.247:3000/api/alunos',
+                    url: _url,
                     data: JSON.stringify(dados), // or JSON.stringify ({name: 'jonas'}),
                     success: function (data) {
                     },
@@ -230,7 +231,6 @@ var _PONTUACAO;
     //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
     // Event Handlers
     //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-
     //--------------------------------------------
     // quando o usuario clicar em um item
     //--------------------------------------------
@@ -335,8 +335,7 @@ var _PONTUACAO;
                     .on('dragstart selectstart', function (evt) {
                         evt.preventDefault();
                         return false;
-                    })
-                ;
+                    });
 
                 createItems(this);
 
@@ -515,5 +514,4 @@ var _PONTUACAO;
             return words;
         }
     }
-
 })(jQuery);
