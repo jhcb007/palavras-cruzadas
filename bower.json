@@ -1,0 +1,11 @@
+{
+  "name": "angular-seed",
+  "description": "A starter project for AngularJS",
+  "version": "0.0.0",
+  "homepage": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6"
+  }
+}

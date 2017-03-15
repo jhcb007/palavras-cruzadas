@@ -1,0 +1,38 @@
+<div class="header clearfix mt-1">
+    <h3 class="text-muted" ng-bind="_turma"></h3>
+</div>
+<hr>
+<div class="row row-offcanvas row-offcanvas-right mt-3">
+    <div class="col-md-10">
+        <p class="float-right hidden-md-up">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
+        </p>
+        <div class="row">
+            <div class="col-3">
+                <h4>Perguntas</h4>
+                <p>Qual foi o marco da Revolução Francesa?</p>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit
+                    amet fermentum.</p>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+            <div class="col-9">
+                <div id="canvas"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 sidebar-offcanvas" id="sidebar">
+        <div class="ml-4">
+            <h5>Ranking</h5>
+        </div>
+        <div class="list-group text-center" style="overflow-y: auto; height:600px; width: 140px;">
+            <div class="profile-header-img" ng-repeat="a in alunos">
+                <a href="https://facebook.com/{{a.id_facebook}}" target="_blank">
+                    <img class="img-circle"  ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=normal"/>
+                </a>
+                <div class="rank-label-container">
+                    <span class="label label-default rank-label" ng-bind="a.pontuacao"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
