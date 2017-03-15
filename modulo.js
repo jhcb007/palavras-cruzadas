@@ -5,7 +5,9 @@ angular.module('moduloGeral', ['servicoGeral'])
     .controller('TurmasController', TurmasController)
     .controller('PerguntasController', PerguntasController);
 
-function InicioController($rootScope, $scope, Aluno) {
+function InicioController($rootScope, $scope, config, Aluno) {
+
+    $rootScope._dev = config.nomeAPP + ' - ' + config.desenvolvedor;
 
     $scope.setAluno = function (dados) {
         var set = {

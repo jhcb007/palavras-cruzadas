@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
-var cors = require('cors')
+var cors = require('cors');
 var alunos = require("./model/alunos.js");
 var turmas = require("./model/turmas.js");
 var perguntas = require("./model/perguntas.js");
@@ -19,7 +19,7 @@ router.get("/", function (req, res) {
 router.route("/api/alunos")
     .get(function (req, res) {
         var response = {};
-        alunos.find({}, function (err, data) {
+        alunos.find({}, null, {sort: {pontuacao: 'descending'}}, function (err, data) {
             if (err) {
                 response = {"status": false, "dado": "Error fetching data"};
             } else {
