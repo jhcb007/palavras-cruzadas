@@ -86,7 +86,6 @@ router.route("/api/perguntas")
     .get(function (req, res) {
         var response = {};
         perguntas.find({}, function (err, data) {
-            // Mongo command to fetch all data from collection.
             if (err) {
                 response = {"status": false, "dado": "Error fetching data"};
             } else {
