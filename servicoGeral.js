@@ -23,8 +23,24 @@ angular.module('servicoGeral', ['ngResource'])
             }
         });
     })
-    .factory('Login', function ($resource, config) {
-        return $resource(config.baseURL + 'api/login', {}, {
+    .factory('Perguntas', function ($resource, config) {
+        return $resource(config.baseURL + 'api/perguntas', {}, {
+            'get': {
+                method: 'GET'
+            },
+            save: {
+                method: 'POST'
+            },
+            'update': {
+                method: 'PUT'
+            }
+        });
+    })
+    .factory('AlunosRespostas', function ($resource, config) {
+        return $resource(config.baseURL + 'api/alunos_resposta', {}, {
+            'get': {
+                method: 'GET'
+            },
             save: {
                 method: 'POST'
             },

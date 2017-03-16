@@ -18,6 +18,18 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/perguntas.html',
             controller: 'PerguntasController'
         })
+        .when('/professor', {
+            templateUrl: 'view/turmas_professor.html',
+            controller: 'TurmasProfessorController'
+        })
+        .when('/professor/:turma', {
+            templateUrl: 'view/professor.html',
+            controller: 'ProfessorController'
+        })
+        .when('/professor/:turma/:aluno', {
+            templateUrl: 'view/professor_aluno.html',
+            controller: 'ProfessorController'
+        })
         .otherwise({
             redirectTo: '/inicio'
         });

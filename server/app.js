@@ -5,6 +5,7 @@ var cors = require('cors');
 var alunos = require("./model/alunos.js");
 var turmas = require("./model/turmas.js");
 var perguntas = require("./model/perguntas.js");
+var alunos_resposta = require("./model/alunos_resposta");
 var router = express.Router();
 
 app.use(bodyParser.json());
@@ -19,14 +20,17 @@ router.get("/", function (req, res) {
 router.route("/api/alunos")
     .get(function (req, res) {
         var response = {};
-        alunos.find({}, null, {sort: {pontuacao: 'descending'}}, function (err, data) {
-            if (err) {
-                response = {"status": false, "dado": "Error fetching data"};
-            } else {
-                response = {"status": true, "dado": data};
-            }
-            res.json(response);
-        });
+        alunos
+            .find({})
+            .sort({pontuacao: 'descending'})
+            .exec(function (err, data) {
+                if (err) {
+                    response = {"status": false, "dado": "Error fetching data"};
+                } else {
+                    response = {"status": true, "dado": data};
+                }
+                res.json(response);
+            });
     })
     .post(function (req, res) {
         var db = new alunos();
@@ -56,18 +60,27 @@ router.route("/api/alunos")
         });
     })
     .put(function (req, res) {
+        var db = new alunos_resposta();
         var response = {};
+        db.resposta = req.body.resposta;
+        db.aluno = req.body._id;
         req.body.pontuacao = (req.body.pontuacao + 1);
-        alunos.findByIdAndUpdate(req.body._id, {pontuacao: req.body.pontuacao}, function (err) {
+        db.save(function (err) {
             if (err) {
-                response = {"status": false, "dado": "Error fetching data"};
+                response = {"status": false, "dado": "Error adding data"};
+                res.json(response);
             } else {
-                response = {"status": true, "dado": "Pontuação Atualizada"};
+                alunos.findByIdAndUpdate(req.body._id, {pontuacao: req.body.pontuacao}, function (err) {
+                    if (err) {
+                        response = {"status": false, "dado": "Error fetching data"};
+                    } else {
+                        response = {"status": true, "dado": "Pontuação Atualizada"};
+                    }
+                    res.json(response);
+                });
             }
-            res.json(response);
         });
     });
-
 
 router.route("/api/turmas")
     .get(function (req, res) {
@@ -93,6 +106,22 @@ router.route("/api/perguntas")
             }
             res.json(response);
         });
+    });
+
+router.route("/api/alunos_resposta")
+    .post(function (req, res) {
+        var response = {};
+        alunos_resposta
+            .find({})
+            .where('aluno', req.body.aluno)
+            .exec(function (err, data) {
+                if (err) {
+                    response = {"status": false, "dado": "Error fetching data"};
+                } else {
+                    response = {"status": true, "dado": data};
+                }
+                res.json(response);
+            });
     });
 
 app.use('/', router);

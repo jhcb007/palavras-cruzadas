@@ -1,5 +1,7 @@
 var _ID_ALUNO;
 var _PONTUACAO;
+var _ID_FACEBOOK;
+var _NOME;
 var _url = "http://192.168.254.247:3000/api/alunos";
 
 (function ($) {
@@ -207,7 +209,8 @@ var _url = "http://192.168.254.247:3000/api/alunos";
                 $('.' + opt.highlightClass).addClass(opt.foundClass);
                 var dados = {
                     _id: _ID_ALUNO,
-                    pontuacao: _PONTUACAO
+                    pontuacao: _PONTUACAO,
+                    resposta: original
                 }
                 $.ajax({
                     type: 'PUT',

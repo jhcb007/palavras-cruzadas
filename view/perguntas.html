@@ -1,4 +1,14 @@
-<div class="header clearfix mt-1">
+<div class="header clearfix mt-2">
+    <nav>
+        <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+                <a class="nav-link active" href>{{_aluno}}<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href>Posição {{_posicao}}</a>
+            </li>
+        </ul>
+    </nav>
     <h3 class="text-muted" ng-bind="_turma"></h3>
 </div>
 <hr>
@@ -9,11 +19,14 @@
         </p>
         <div class="row">
             <div class="col-3">
-                <h4>Perguntas</h4>
-                <p>Qual foi o marco da Revolução Francesa?</p>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
-                    fermentum.</p>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                <h6>Perguntas {{_perguntas.length}} - <span class="text-success">Respostas  {{(_perguntas|filter:status==true).length}}</span>
+                </h6>
+                <div style="overflow-y: auto; height:600px; width: 100%;">
+                    <p ng-repeat="p in _perguntas">
+                        <span ng-show="p.status == false" ng-bind="p.pergunta"></span>
+                        <span ng-show="p.status == true"><s>{{p.pergunta}}</s> <span class="text-success">R: {{p.resposta}}</span></span>
+                    </p>
+                </div>
             </div>
             <div class="col-9">
                 <div id="canvas"></div>
@@ -22,12 +35,13 @@
     </div>
     <div class="col-md-2 sidebar-offcanvas" id="sidebar">
         <div class="ml-4">
-            <h5>Ranking</h5>
+            <h6>Ranking</h6>
         </div>
         <div class="list-group text-center" style="overflow-y: auto; height:600px; width: 140px;">
             <div class="profile-header-img" ng-repeat="a in alunos">
                 <a href="https://facebook.com/{{a.id_facebook}}" title="{{a.nome}}" target="_blank">
-                    <img class="img-circle" ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=normal"/>
+                    <img class="rounded-circle"
+                         ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=normal"/>
                 </a>
                 <div class="rank-label-container">
                     <span class="label label-default rank-label">{{a.pontuacao}} Pontos</span>
