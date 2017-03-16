@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"palavras-cruzadas.alunos"},{"v":1,"unique":true,"key":{"id_facebook":1},"name":"id_facebook_1","ns":"palavras-cruzadas.alunos","background":true}]}
