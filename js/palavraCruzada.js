@@ -2,7 +2,7 @@ var _ID_ALUNO;
 var _PONTUACAO;
 var _ID_FACEBOOK;
 var _NOME;
-var _url = "http://192.168.254.247:3000/api/alunos";
+var _url = "http://35.185.110.128:8080/api/alunos";
 
 (function ($) {
     // plugin namespace
