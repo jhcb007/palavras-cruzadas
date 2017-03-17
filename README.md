@@ -7,6 +7,15 @@
 
 Projetos para disciplina de Gestão Tecnologia 1
 
+Download das dependências:
+
+    sudo npm install
+    
+
+Download dos pacotes:
+
+    bower install
+ 
 
 Restaurar banco de dados:
 
