@@ -23,7 +23,7 @@ function TurmasController($rootScope, $scope, Turmas) {
     }
 }
 
-function PerguntasController($rootScope, $scope, Aluno, Perguntas) {
+function PerguntasController($rootScope, $scope, Aluno, Perguntas, AlunosRespostas) {
 
     var array_pergunta = [];
 
@@ -37,6 +37,15 @@ function PerguntasController($rootScope, $scope, Aluno, Perguntas) {
                     _ID_ALUNO = $rootScope._aluno_banco_id;
                     _PONTUACAO = $rootScope._aluno_pontuacao;
                     $rootScope._posicao = key + 1;
+                    AlunosRespostas.save({}, {aluno: $rootScope._aluno_banco_id}, function (resul) {
+                        angular.forEach(resul.dado, function (r_value, r_key) {
+                            angular.forEach($rootScope._perguntas, function (p_value, p_key) {
+                                if (r_value.resposta == p_value.resposta) {
+                                    p_value.status = true;
+                                }
+                            });
+                        });
+                    });
                 }
             });
         });
