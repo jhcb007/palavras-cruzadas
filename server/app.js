@@ -11,7 +11,7 @@ var router = express.Router();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({"extended": false}));
 
-app.use(cors({origin: 'http://192.168.254.247:8002'}));
+app.use(cors({origin: '*'}));
 
 router.get("/", function (req, res) {
     res.json({"error": false, "message": "Hello World"});
@@ -126,7 +126,7 @@ router.route("/api/alunos_resposta")
 
 app.use('/', router);
 
-app.listen(3000);
-console.log("Listening to PORT 3000");
+app.listen(8080);
+console.log("Listening to PORT 8080");
 
 //http-server -a 192.168.254.247  -p 8002 -c-1
