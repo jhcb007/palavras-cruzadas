@@ -45,7 +45,7 @@ function setAluno() {
     }
     $.ajax({
         type: 'POST',
-        url: _url,
+        url: _url + "api/alunos",
         data: JSON.stringify(dados),
         success: function (data) {
             //console.log(data);
