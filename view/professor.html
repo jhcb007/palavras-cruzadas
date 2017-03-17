@@ -2,7 +2,7 @@
     <nav>
         <ul class="nav nav-pills float-right">
             <li class="nav-item">
-                <a class="nav-link active" href="#/professor" role="button">Voltar<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#/professor">Voltar</a>
             </li>
         </ul>
     </nav>
@@ -13,20 +13,21 @@
     <div class="col-8">
         <div style="overflow-y: auto; height:600px; width: 100%;">
             <div class="row">
-                <div ng-repeat="a in alunos" class="col-3">
-                    <img class="rounded-circle"
-                         ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=large"
-                         alt="{{a.nome}}" width="140" height="140">
+                <div ng-repeat="a in alunos" class="col-3 text-center">
+                    <a href="https://facebook.com/{{a.id_facebook}}" title="{{a.nome}}" target="_blank"><img
+                            class="rounded-circle"
+                            ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=large"
+                            alt="{{a.nome}}" width="140" height="140"></a>
                     <h6 ng-bind="a.nome"></h6>
-                    <p ng-show="a.pontuacao > 0"><a class="btn btn-secondary" href="#/professor/turma/{{a._id}}"
-                                                    role="button">{{a.pontuacao}}
+                    <p ng-show="a.pontuacao > 0"><a class="btn btn-secondary"
+                                                    href="#/professor/{{turma_link}}/{{a._id}}" role="button">{{a.pontuacao}}
                         Pontos »</a></p>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-4">
-        <h6>Perguntas {{_perguntas.length}}</h6>
+        <h6>{{_perguntas.length}} Perguntas</h6>
         <div style="overflow-y: auto; height:600px; width: 100%;">
             <p ng-repeat="p in _perguntas">
                 <span>{{p.pergunta}} <span class="text-success">R: {{p.resposta}}</span></span>

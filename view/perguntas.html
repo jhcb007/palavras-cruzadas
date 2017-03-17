@@ -2,24 +2,21 @@
     <nav>
         <ul class="nav nav-pills float-right">
             <li class="nav-item">
-                <a class="nav-link active" href>{{_aluno}}<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href>Posição {{_posicao}}</a>
+                <a class="nav-link" href="#/turmas">Voltar</a>
             </li>
         </ul>
     </nav>
-    <h3 class="text-muted" ng-bind="_turma"></h3>
+    <h4 class="text-muted">{{_turma}} ({{_aluno}} - Posição {{_posicao}} de {{alunos.length}})</h4>
 </div>
 <hr>
-<div class="row row-offcanvas row-offcanvas-right mt-3">
+<div class="row row-offcanvas row-offcanvas-right mt-2">
     <div class="col-md-10">
         <p class="float-right hidden-md-up">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
         </p>
         <div class="row">
             <div class="col-3">
-                <h6>Perguntas {{_perguntas.length}} - <span class="text-success">Respostas  {{(_perguntas|filter:status==true).length}}</span>
+                <h6>{{_perguntas.length}} Perguntas - <span class="text-success">{{((_perguntas | filter:status==true).length) - (_perguntas.length)}} Respostas</span>
                 </h6>
                 <div style="overflow-y: auto; height:600px; width: 100%;">
                     <p ng-repeat="p in _perguntas">

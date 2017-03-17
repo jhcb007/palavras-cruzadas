@@ -2,38 +2,17 @@
     <nav>
         <ul class="nav nav-pills float-right">
             <li class="nav-item">
-                <a class="nav-link active" href>{{_aluno}}<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href>Posição {{_posicao}}</a>
+                <a class="nav-link" href="#/professor/{{turma_link}}">Voltar</a>
             </li>
         </ul>
     </nav>
-    <h3 class="text-muted" ng-bind="_turma"></h3>
+    <h4 class="text-muted">{{_turma}} ({{aluno}} - Posição {{posicao}} de {{alunos.length}})</h4>
 </div>
 <hr>
-<div class="row row-offcanvas row-offcanvas-right mt-3">
-    <div class="col-8">
-        <div style="overflow-y: auto; height:600px; width: 100%;">
-            <div class="row">
-                <div ng-repeat="a in alunos" class="col-3">
-                    <img class="rounded-circle"
-                         ng-src="http://graph.facebook.com/{{a.id_facebook}}/picture?type=large"
-                         alt="{{a.nome}}" width="140" height="140">
-                    <h6 ng-bind="a.nome"></h6>
-                    <p ng-show="a.pontuacao > 0"><a class="btn btn-secondary" href="#" role="button">{{a.pontuacao}}
-                        Pontos »</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-4">
-        <h6>Perguntas {{_perguntas.length}} - <span class="text-success">Respostas  {{(_perguntas|filter:status==true).length}}</span>
-        </h6>
-        <div style="overflow-y: auto; height:600px; width: 100%;">
-            <p ng-repeat="p in _perguntas">
-                <span>{{p.pergunta}} <span class="text-success">R: {{p.resposta}}</span></span>
-            </p>
-        </div>
+<h4 class="mb-3">Respostas</h4>
+<div class="row marketing text-justify">
+    <div ng-repeat="p in perguntas_aluno" class="col-3">
+        <h6 ng-bind="p.pergunta"></h6>
+        <p class="text-success" ng-bind="p.resposta"></p>
     </div>
 </div>

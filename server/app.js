@@ -17,6 +17,14 @@ router.get("/", function (req, res) {
     res.json({"error": false, "message": "Hello World"});
 });
 
+/* Remover aluno
+ alunos.remove({ _id: '58cacd79c0537e2851499bd8'}, function(err) {
+ if (!err) {
+ }
+ else {
+ }
+ });*/
+
 router.route("/api/alunos")
     .get(function (req, res) {
         var response = {};
@@ -129,4 +137,4 @@ app.use('/', router);
 app.listen(8080);
 console.log("Listening to PORT 8080");
 
-//http-server -a 192.168.254.247  -p 8002 -c-1
+//http-server -a localhost -p 8000 -c-1

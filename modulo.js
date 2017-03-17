@@ -5,10 +5,11 @@ angular.module('moduloGeral', ['servicoGeral'])
     .controller('TurmasController', TurmasController)
     .controller('PerguntasController', PerguntasController)
     .controller('TurmasProfessorController', TurmasProfessorController)
-    .controller('ProfessorController', ProfessorController);
+    .controller('ProfessorController', ProfessorController)
+    .controller('ProfessorAlunoController', ProfessorAlunoController);
 
 function InicioController($rootScope, config) {
-    $rootScope._dev = config.nomeAPP + ' - ' + config.desenvolvedor;
+    $rootScope._dev = config.nomeAPP + config.desenvolvedor;
 }
 
 function TurmasController($rootScope, $scope, Turmas) {
@@ -22,7 +23,7 @@ function TurmasController($rootScope, $scope, Turmas) {
     }
 }
 
-function PerguntasController($rootScope, $scope, Aluno, Perguntas, AlunosRespostas) {
+function PerguntasController($rootScope, $scope, Aluno, Perguntas) {
 
     var array_pergunta = [];
 
@@ -36,16 +37,6 @@ function PerguntasController($rootScope, $scope, Aluno, Perguntas, AlunosRespost
                     _ID_ALUNO = $rootScope._aluno_banco_id;
                     _PONTUACAO = $rootScope._aluno_pontuacao;
                     $rootScope._posicao = key + 1;
-                    AlunosRespostas.save({}, {aluno: $rootScope._aluno_banco_id}, function (resul) {
-                        angular.forEach(resul.dado, function (r_value, r_key) {
-                            angular.forEach($rootScope._perguntas, function (p_value, p_key) {
-                                if (r_value.resposta == p_value.resposta) {
-                                    p_value.status = true;
-                                    console.log($rootScope._perguntas);
-                                }
-                            });
-                        });
-                    });
                 }
             });
         });
@@ -80,16 +71,23 @@ function PerguntasController($rootScope, $scope, Aluno, Perguntas, AlunosRespost
 
 }
 
-function TurmasProfessorController($rootScope, $scope, Turmas) {
+function TurmasProfessorController($rootScope, $scope, Turmas, Perguntas) {
     Turmas.get({}, function (resul) {
         $scope.turmas = resul.dado;
     });
+
+    Perguntas.get({}, function (resul) {
+        $rootScope._perguntas = resul.dado;
+    });
+
     $scope.acessaTurma = function (turma) {
         $rootScope._turma = turma;
     }
 }
 
-function ProfessorController($rootScope, $scope, Aluno, Perguntas, AlunosRespostas) {
+function ProfessorController($rootScope, $routeParams, $scope, Aluno, Perguntas) {
+
+    $scope.turma_link = $routeParams.turma;
 
     $scope.atualizaAlunos = function () {
         Aluno.get({}, function (resul) {
@@ -107,5 +105,33 @@ function ProfessorController($rootScope, $scope, Aluno, Perguntas, AlunosRespost
         $scope.atualizaAlunos();
     }, 2000);
 
+}
+
+function ProfessorAlunoController($rootScope, $routeParams, $scope, Aluno, AlunosRespostas) {
+
+    $scope.turma_link = $routeParams.turma;
+
+    Aluno.get({}, function (resul) {
+        $scope.alunos = resul.dado;
+        angular.forEach($scope.alunos, function (value, key) {
+            if ($routeParams.aluno == value._id) {
+                $scope.aluno = value.nome;
+                $scope.posicao = key + 1;
+                return;
+            }
+        });
+    });
+
+    AlunosRespostas.save({}, {aluno: $routeParams.aluno}, function (resul) {
+        var perguntas = [];
+        angular.forEach(resul.dado, function (r_value, r_key) {
+            angular.forEach($rootScope._perguntas, function (p_value, p_key) {
+                if (r_value.resposta == p_value.resposta) {
+                    perguntas.push(p_value);
+                }
+            });
+        });
+        $scope.perguntas_aluno = perguntas;
+    });
 
 }

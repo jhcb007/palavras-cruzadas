@@ -1,5 +1,5 @@
 /**
- * Created by Henrique Brandão on 24/11/2016.
+ * Created by Henrique Brandão on 14/03/2017.
  */
 'use strict';
 var app = angular.module('appPalavraCruzadas', ['ngRoute', 'moduloGeral']);
@@ -28,7 +28,7 @@ app.config(function ($routeProvider) {
         })
         .when('/professor/:turma/:aluno', {
             templateUrl: 'view/professor_aluno.html',
-            controller: 'ProfessorController'
+            controller: 'ProfessorAlunoController'
         })
         .otherwise({
             redirectTo: '/inicio'
