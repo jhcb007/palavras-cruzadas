@@ -2,7 +2,7 @@ var _ID_ALUNO;
 var _PONTUACAO;
 var _ID_FACEBOOK;
 var _NOME;
-var _url = "http://35.185.110.128:8080/api/alunos";
+var _url = "http://35.185.110.128:8080/";
 
 (function ($) {
     // plugin namespace
@@ -214,7 +214,7 @@ var _url = "http://35.185.110.128:8080/api/alunos";
                 }
                 $.ajax({
                     type: 'PUT',
-                    url: _url,
+                    url: _url + "api/alunos",
                     data: JSON.stringify(dados), // or JSON.stringify ({name: 'jonas'}),
                     success: function (data) {
                     },
