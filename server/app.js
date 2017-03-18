@@ -73,21 +73,36 @@ router.route("/api/alunos")
         db.resposta = req.body.resposta;
         db.aluno = req.body._id;
         req.body.pontuacao = (req.body.pontuacao + 1);
-        db.save(function (err) {
-            if (err) {
-                response = {"status": false, "dado": "Error adding data"};
-                res.json(response);
-            } else {
-                alunos.findByIdAndUpdate(req.body._id, {pontuacao: req.body.pontuacao}, function (err) {
-                    if (err) {
-                        response = {"status": false, "dado": "Error fetching data"};
-                    } else {
-                        response = {"status": true, "dado": "Pontuação Atualizada"};
-                    }
+        alunos_resposta.find({})
+            .where('resposta', req.body.resposta)
+            .where('aluno', req.body._id)
+            .exec(function (err, data) {
+                if (err) {
+                    response = {"status": false, "dado": "Error fetching data"};
                     res.json(response);
-                });
-            }
-        });
+                } else {
+                    if (data.length == 0) {
+                        db.save(function (err) {
+                            if (err) {
+                                response = {"status": false, "dado": "Error adding data"};
+                                res.json(response);
+                            } else {
+                                alunos.findByIdAndUpdate(req.body._id, {pontuacao: req.body.pontuacao}, function (err) {
+                                    if (err) {
+                                        response = {"status": false, "dado": "Error fetching data"};
+                                    } else {
+                                        response = {"status": true, "dado": "Pontuação Atualizada"};
+                                    }
+                                    res.json(response);
+                                });
+                            }
+                        });
+                    } else {
+                        response = {"status": true, "dado": "Pergunta já foi respondida"};
+                        res.json(response);
+                    }
+                }
+            });
     });
 
 router.route("/api/turmas")
