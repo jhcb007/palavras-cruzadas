@@ -5,11 +5,11 @@
 # Palavras Cruzadas #
 
 
-Projetos para disciplina de Gestão Tecnologia 1
+Projeto de Gestão Tecnologia 1
 
 Download das dependências:
 
-    sudo npm install
+    npm install
     
 
 Download dos pacotes:
@@ -19,11 +19,11 @@ Download dos pacotes:
 
 Restaurar banco de dados:
 
-    sudo mongorestore --db palavras-cruzadas --drop /{seu caminho}/banco/
+    mongorestore --db palavras-cruzadas --drop /{seu caminho}/banco/
 
 Start servidor Nodejs /palavras-cruzadas/server/:
 
-    sudo node app.js
+    node app.js
     
 **Exemplo Aluno:** (http://35.185.110.128/palavras-cruzadas/)
 
