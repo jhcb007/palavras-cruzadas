@@ -25,9 +25,4 @@ Start servidor Nodejs /palavras-cruzadas/server/:
 
     node app.js
     
-**Exemplo Aluno:** (http://35.185.110.128/palavras-cruzadas/)
-
-
-**Exemplo Professor:** (http://35.185.110.128/palavras-cruzadas/#/professor)
-    
 
